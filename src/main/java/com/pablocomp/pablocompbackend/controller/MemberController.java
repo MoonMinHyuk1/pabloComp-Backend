@@ -36,10 +36,14 @@ public class MemberController {
 
     @PostMapping("/member/serialNum")
     @ResponseBody
-    public Member findMemberBySerialNumPost(@RequestParam("serialNum") String serialNum) {
+    public String findMemberBySerialNumPost(@RequestParam("serialNum") String serialNum) {
         Optional<Member> findMember = memberRepository.findBySerialNum(serialNum, OrderStatus.ORDER);
 
-        return findMember.get();
+        if(findMember.isEmpty()) {
+            return "NO";
+        } else {
+            return "YES";
+        }
     }
 
     @PostMapping("/member/tempPw")

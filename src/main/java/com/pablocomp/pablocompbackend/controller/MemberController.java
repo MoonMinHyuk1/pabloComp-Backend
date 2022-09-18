@@ -6,6 +6,7 @@ import com.pablocomp.pablocompbackend.repository.MemberRepository;
 import com.pablocomp.pablocompbackend.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class MemberController {
     private final MemberRepository memberRepository;
     private final MemberService memberService;
+    private final PasswordEncoder passwordEncoder;
 
     @PostConstruct
     public void initPost() {
@@ -24,6 +26,8 @@ public class MemberController {
             Member member = new Member(OrderStatus.ORDER, "123456abc" + i, "abc" + i);
             memberRepository.save(member);
         }
+        Member member = new Member(OrderStatus.ORDER, passwordEncoder.encode("PAEX20220906204430"), passwordEncoder.encode("7890"));
+        memberRepository.save(member);
     }
 
     @GetMapping("/init")

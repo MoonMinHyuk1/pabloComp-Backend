@@ -23,11 +23,6 @@ public class MemberRepository {
         return member;
     }
 
-    public List<Member> findAll() {
-        return em.createQuery("select m from Member m", Member.class)
-                .getResultList();
-    }
-
     public long findBySerialNum(String serialNum, OrderStatus orderStatus) {
         return em.createQuery("select count(m) from Member m where m.serialNum = :serialNum and m.orderStatus = :orderStatus", Long.class)
                 .setParameter("serialNum", serialNum)

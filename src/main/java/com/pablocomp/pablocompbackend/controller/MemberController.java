@@ -22,20 +22,8 @@ public class MemberController {
 
     @PostConstruct
     public void initPost() {
-        for(int i = 1; i <= 10; i++) {
-            Member member = new Member(OrderStatus.ORDER, "123456abc" + i, "abc" + i);
-            memberRepository.save(member);
-        }
         Member member = new Member(OrderStatus.ORDER, "PAEX20220906204430", passwordEncoder.encode("7890"));
         memberRepository.save(member);
-    }
-
-    @GetMapping("/init")
-    @ResponseBody
-    public List<Member> initGet() {
-        List<Member> memberList = memberRepository.findAll();
-
-        return memberList;
     }
 
     @PostMapping("/member/serialNum")
